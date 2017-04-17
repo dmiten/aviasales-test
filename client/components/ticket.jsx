@@ -3,8 +3,9 @@
 import React from 'react';
 
 import STYLES from './styles.js';
-import connectionName from './connection-name.js';
-import dayOfWeek from './day-of-week.js';
+import {connectionName} from './common-functions.js';
+import {DateWithMonthName} from './common-functions.js';
+import {dayOfWeek} from './common-functions.js';
 
 export default class Ticket extends React.Component {
 
@@ -16,28 +17,28 @@ export default class Ticket extends React.Component {
   }
 
   render() {
+
     let item = this.props.item,
         index = this.props.index,
         callbackBuy = this.props.callbackBuy,
         carrierLogo = require(
             'url-loader?mimetype=image/png!../res/' + item.carrier + '.png'),
         flight = require('url-loader?mimetype=image/png!../res/flight.png')
+
     return (
         <div style={this.state.ticketStyle}
              onMouseOver={() => this.setState({ticketStyle: STYLES.ticketIn})}
              onMouseOut={() => this.setState({ticketStyle: STYLES.ticketOut})}>
-          <div style={STYLES.tcCarrierLink}
-               key='tcCarrierLink'
-          >
+          <div style={STYLES.tcCarrierLink}>
             <div style={STYLES.carrier}>
               <img src={carrierLogo}/>
             </div>
-            <input style={STYLES.tcLinkButton}
+            <br/>
+            <div style={STYLES.tcLinkButton}
                    id={'tcLinkButton' + index}
-                   type='button'
-                   value={'Купить за ' + item.price + ' \u20BD'}
-                   onClick={() => callbackBuy(item)}
-            />
+                   onClick={() => callbackBuy(item)}>
+              Купить <br/> за {'\n' + item.price + ' \u20BD'}
+            </div>
           </div>
           <div style={STYLES.tcDeparture}>
             <div style={STYLES.tcTime}>
@@ -46,8 +47,9 @@ export default class Ticket extends React.Component {
             <div style={STYLES.tcCity}>
               {item.origin + ', ' + item.origin_name}
             </div>
-            <div>
-              {item.departure_date + ', ' + dayOfWeek(item.departure_date)}
+            <div style={STYLES.tcDate}>
+              {DateWithMonthName(item.departure_date) + ', ' + dayOfWeek(
+                  item.departure_date)}
             </div>
           </div>
           <div style={STYLES.tcConnections}>
@@ -59,10 +61,11 @@ export default class Ticket extends React.Component {
               {item.arrival_time}
             </div>
             <div style={STYLES.tcCity}>
-              {item.destination + ', ' + item.destination_name}
+              {item.destination_name + ', ' + item.destination}
             </div>
-            <div>
-              {item.arrival_date + ', ' + dayOfWeek(item.departure_date)}
+            <div style={STYLES.tcDate}>
+              {DateWithMonthName(item.arrival_date) + ', ' + dayOfWeek(
+                  item.arrival_date)}
             </div>
           </div>
         </div>

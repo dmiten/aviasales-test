@@ -27,8 +27,19 @@ export default class SelectingOfConnections extends React.Component {
   }
 
   render() {
+
     let checked = this.props.connectionState.reduce(
-        (previous, current) => previous && current);
+        (previous, current) => previous && current),
+        checkBoxPic = {};
+
+    if (checked) {
+      checkBoxPic = require(
+          'url-loader?mimetype=image/png!../res/check-box-checked.png')
+    } else {
+      checkBoxPic = require(
+          'url-loader?mimetype=image/png!../res/check-box.png');
+    }
+
     return (
         <div style={STYLES.selecting}>
           <form name='SelectingOfConnections'>
@@ -42,15 +53,8 @@ export default class SelectingOfConnections extends React.Component {
                  onMouseOut={() => this.setState(
                      {allSelectingStyle: STYLES.allSelectingInactive})}
             >
-              &emsp;
-              <input key={'csAll'}
-                     type='checkbox'
-                     checked={checked}
-                     value='Все'
-                     onChange={() => this.props.setConnection('all', -1,
-                         !checked)}
-              />
-              все
+              &emsp;<img src={checkBoxPic}/>
+              &ensp;Все
             </div>
             {this.props.connectionState.map(
                 (item, index) => this.renderLineInSelecting(index))}

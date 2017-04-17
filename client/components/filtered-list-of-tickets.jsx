@@ -8,6 +8,8 @@ import Ticket from './ticket.jsx';
 export default class FilteredListOfTickets extends React.Component {
 
   render() {
+
+    /* фильтрация по количеству стыковок */
     let filteringPredicate = (item) => {
           if (( item.stops < 4 ) && (this.props.connectionState[item.stops])) {
             return true
@@ -15,9 +17,13 @@ export default class FilteredListOfTickets extends React.Component {
             return false
           }
         },
+
+        /* сортировка по возрастанию цены */
         sortingPredicate = (item, nextItem) => {
           return (item.price - nextItem.price)
         },
+
+        /* рендер одного билета */
         renderOneTicket = (item, index) =>
             <Ticket key={'tc' + index}
                     name={'tc' + index}
@@ -26,13 +32,11 @@ export default class FilteredListOfTickets extends React.Component {
                     callbackBuy={this.props.buyButtonHandler}
             />
     return (
-        <div style={STYLES.list}
-             name='FilteredListOfTickets'
-        >
+        <div style={STYLES.list}>
           {
-            this.props.ticketsList.sort(
-                (item, nextItem) => sortingPredicate(item, nextItem)).filter(
-                (item) => filteringPredicate(item)).map(
+            this.props.ticketsList.filter(
+                (item) => filteringPredicate(item)).sort(
+                (item, nextItem) => sortingPredicate(item, nextItem)).map(
                 (item, index) => renderOneTicket(item, index))
           }
         </div>

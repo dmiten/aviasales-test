@@ -3,7 +3,7 @@
 import React from 'react';
 
 import STYLES from './styles.js';
-import connectionName from './connection-name.js';
+import {connectionName} from './common-functions.js';
 
 export default class LineInSelecting extends React.Component {
 
@@ -16,21 +16,34 @@ export default class LineInSelecting extends React.Component {
   }
 
   render() {
+
     let index = this.props.index,
         checked = this.props.checked,
         boxName = connectionName(index),
         setConnectionLine = this.props.setConnection,
         setConnectionOnly = () => null,
         lineInSelectingStyle = STYLES.lineInSelectingInactive,
-        onlySelectingStyle = STYLES.onlySelectingInactive;
+        onlySelectingStyle = STYLES.onlySelectingInactive,
+        checkBoxPic = {};
+
+    if (checked) {
+      checkBoxPic = require(
+          'url-loader?mimetype=image/png!../res/check-box-checked.png')
+    } else {
+      checkBoxPic = require(
+          'url-loader?mimetype=image/png!../res/check-box.png');
+    }
+
     if (this.state.mouseOver) {
       lineInSelectingStyle = STYLES.lineInSelectingActive;
       onlySelectingStyle = STYLES.onlySelectingActive
     }
+
     if (this.state.mouseOverOnly) {
       setConnectionOnly = this.props.setConnection;
       setConnectionLine = () => null
     }
+
     return (
         <div style={lineInSelectingStyle}
              id={'l' + index}
@@ -38,13 +51,8 @@ export default class LineInSelecting extends React.Component {
              onMouseOver={() => this.setState({mouseOver: true})}
              onMouseOut={() => this.setState({mouseOver: false})}
         >
+          &emsp;<img src={checkBoxPic}/>&ensp;
           <div>
-            &emsp;
-            <input type='checkbox'
-                   value={boxName}
-                   checked={checked}
-                   onChange={() => setConnectionLine('one', index)}
-            />
             {boxName}
           </div>
           <div style={onlySelectingStyle}
@@ -53,7 +61,7 @@ export default class LineInSelecting extends React.Component {
                onMouseOver={() => this.setState({mouseOverOnly: true})}
                onMouseOut={() => this.setState({mouseOverOnly: false})}
           >
-            только &ensp;
+            &emsp;&emsp;только
           </div>
         </div>
     )

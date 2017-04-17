@@ -4,6 +4,7 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
     PSHADOW = '0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
     STYLES = {
       main: {
+        fontFamily: 'Arial, sans-serif',
         cursor: 'default',
         userSelect: 'none',
         display: 'flex',
@@ -17,13 +18,16 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
         position: 'fixed',
         display: 'flex',
         justifyContent: 'center',
-        backgroundColor: '#f3f7fa'
+        backgroundColor: '#f3f7fa',
+        boxShadow: '0 4px 4px 0 rgba(243, 247, 250, 1), 0 6px 3px 0 rgba(243, 247, 250, 0.19)'
       },
       headerLogo: {
 
       },
       selecting: {
-        top: 90,
+        top: 95,
+        left: 70,
+        fontSize: '80%',
         display: 'flex',
         position: 'fixed',
         flexDirection: 'column',
@@ -53,7 +57,7 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
       lineInSelectingActive: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         alignItems: 'center',
         padding: 5,
         backgroundColor: '#f1fcff'
@@ -61,7 +65,7 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
       lineInSelectingInactive: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'start',
         alignItems: 'center',
         padding: 5,
         backgroundColor: '#ffffff'
@@ -77,7 +81,7 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
       list: {
         flexDirection: 'column',
         paddingLeft: 270,
-        paddingTop: 72
+        paddingTop: 75
       },
       ticketOut: {
         display: 'flex',
@@ -86,8 +90,9 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
         borderWidth: 1,
         borderRadius: '5px',
         borderColor: '#ffffff',
-        padding: 5,
-        marginBottom: 10,
+        padding: 15,
+        marginBottom: 18,
+        minHeight: 110,
         backgroundColor: '#ffffff',
         boxShadow: PSHADOW
       },
@@ -98,29 +103,36 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
         borderWidth: 1,
         borderRadius: '5px',
         borderColor: '#ffffff',
-        padding: 5,
-        marginBottom: 10,
+        padding: 15,
+        marginBottom: 18,
+        minHeight: 110,
         backgroundColor: '#ffffff',
         boxShadow: ASHADOW
       },
       tcCarrierLink: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignSelf: 'center',
+        alignItems: 'center',
+        fontSize: '50%'
       },
       carrier: {},
       tcTime: {
-        fontSize: '200%'
+        fontSize: '170%'
       },
       tcCity: {
-        fontWeight: 600
+        fontWeight: 500
       },
       tcLinkButton: {
+        textAlign: 'center',
         borderStyle: 'solid',
         borderWidth: 1,
         borderRadius: '3px',
-        borderColor: '#ff6d00',
+        width: '120',
         padding: 10,
+        fontSize: '200%',
+        color: '#ffffff',
+        borderColor: '#ff6d00',
         backgroundColor: '#ff6d00'
       },
       tcDeparture: {
@@ -130,18 +142,24 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
         marginLeft: 10,
         borderLeftStyle: 'solid',
         borderLeftWidth: 2,
-        borderLeftColor: '#eceff1'
+        borderLeftColor: '#eceff1',
+        textAlign: 'left'
+      },
+      tcDate: {
+        fontSize: '70%'
       },
       tcConnections: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        fontSize: '80%',
         paddingLeft: 20
       },
       tcArrival: {
         display: 'flex',
         flexDirection: 'column',
-        paddingLeft: 20
+        paddingLeft: 20,
+        textAlign: 'right'
       }
     };
 

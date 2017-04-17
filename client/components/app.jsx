@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import loadTickets from './load-tickets.js';
 import STYLES from './styles.js';
 import SelectingOfConnections from './selecting-of-connections.jsx';
 import FilteredListOfTickets from './filtered-list-of-tickets.jsx';
@@ -13,11 +12,22 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticketsList: loadTickets(),
+      ticketsList: [],
       connectionState: Array(4).fill(true)
     }
   }
 
+  componentDidMount() {
+    fetch(require('url-loader?mimetype= application/json!../res/tickets.json'))
+    .then((res) => res.json())
+    .then((data) => {
+      this.setState({ticketsList: data.tickets})
+    }).catch((e) => {
+      console.error(e);
+    })
+  }
+
+  /* обработчик выбора количества стыковок для SelectingOfConnections */
   setConnection = (type, index, checked) => {
     switch (type) {
       case 'all': {
