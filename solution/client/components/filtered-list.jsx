@@ -17,16 +17,9 @@ export default class FilteredListOfTickets extends React.Component {
             return false
           }
         },
-
-        /* сортировка по возрастанию цены */
-        sortingPredicate = (item, nextItem) => {
-          return (item.price - nextItem.price)
-        },
-
         /* рендер одного билета */
         renderOneTicket = (item, index) =>
             <Ticket key={'tc' + index}
-                    name={'tc' + index}
                     item={item}
                     index={index}
                     callbackBuy={this.props.buyButtonHandler}
@@ -34,9 +27,11 @@ export default class FilteredListOfTickets extends React.Component {
     return (
         <div style={STYLES.list}>
           {
+            /* отфильтровать список по количеству стыковок ->
+             отсортировать по возрастанию цены ->
+             каждый получившийся отрисовать */
             this.props.ticketsList.filter(
-                (item) => filteringPredicate(item)).sort(
-                (item, nextItem) => sortingPredicate(item, nextItem)).map(
+                (item) => filteringPredicate(item)).map(
                 (item, index) => renderOneTicket(item, index))
           }
         </div>

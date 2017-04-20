@@ -3,8 +3,8 @@
 import React from 'react';
 
 import STYLES from './styles.js';
-import SelectingOfConnections from './selecting-of-connections.jsx';
-import FilteredListOfTickets from './filtered-list-of-tickets.jsx';
+import SelectingOfConnections from './connections-set.jsx';
+import FilteredListOfTickets from './filtered-list.jsx';
 import Header from './header.jsx'
 
 export default class App extends React.Component {
@@ -18,32 +18,34 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch(require('url-loader?mimetype= application/json!../res/tickets.json'))
+    fetch('./res/tickets.json')
     .then((res) => res.json())
     .then((data) => {
-      this.setState({ticketsList: data.tickets})
+      this.setState({
+        ticketsList: data.tickets.sort(
+            (item, nextItem) => item.price - nextItem.price)
+      })
     }).catch((e) => {
-      console.error(e);
+      console.error(e.message);
     })
   }
 
   /* обработчик выбора количества стыковок для SelectingOfConnections */
   setConnection = (type, index, checked) => {
     switch (type) {
+      /* вкл/выкл все */
       case 'all': {
-        if (checked) {
-          this.setState({connectionState: Array(4).fill(true)})
-        } else {
-          this.setState({connectionState: Array(4).fill(false)})
-        }
-      };
+        this.setState({connectionState: Array(4).fill(checked)})
+      }
         break;
+      /* выбран единственный пункт */
       case 'only': {
         let newConnectionState = Array(4).fill(false);
         newConnectionState[index] = true;
         this.setState({connectionState: newConnectionState})
-      };
+      }
         break;
+      /* вкл/выкл один из пунктов */
       case 'one': {
         let newConnectionState = this.state.connectionState.slice();
         newConnectionState[index] = !newConnectionState[index];
@@ -53,10 +55,11 @@ export default class App extends React.Component {
   }
 
   buyButtonHandler = (item) => {
-    alert('{родительский обработчик покупки}')
+    alert('{родительский обработчик покупки} ' + item.price)
   }
 
   render() {
+
     return (
         <div>
           <Header />

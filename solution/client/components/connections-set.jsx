@@ -3,7 +3,7 @@
 import React from 'react';
 
 import STYLES from './styles.js';
-import LineInSelecting from './line-in-selecting.jsx';
+import LineInSelecting from './connection-each.jsx';
 
 export default class SelectingOfConnections extends React.Component {
 
@@ -18,7 +18,6 @@ export default class SelectingOfConnections extends React.Component {
     return (
         <LineInSelecting
             key={'cs' + index}
-            name={'cs' + index}
             index={index}
             checked={this.props.connectionState[index]}
             setConnection={this.props.setConnection}
@@ -28,36 +27,36 @@ export default class SelectingOfConnections extends React.Component {
 
   render() {
 
+    /* если выбраны все варианты -> вкл. 'все' */
     let checked = this.props.connectionState.reduce(
         (previous, current) => previous && current),
-        checkBoxPic = {};
+        checkBoxPic = {},
+        allSelectingMouseHandler = (ev) => {
+        this.setState({allSelectingStyle: STYLES['allSelecting' + ev]})
+        }
 
     if (checked) {
-      checkBoxPic = require(
-          'url-loader?mimetype=image/png!../res/check-box-checked.png')
+      checkBoxPic = './res/check-box-checked.png'
     } else {
-      checkBoxPic = require(
-          'url-loader?mimetype=image/png!../res/check-box.png');
+      checkBoxPic = './res/check-box.png';
     }
 
     return (
         <div style={STYLES.selecting}>
           <form name='SelectingOfConnections'>
-            &emsp; КОЛИЧЕСТВО ПЕРЕСАДОК &emsp;
+            {'\u2003\u00A0 КОЛИЧЕСТВО ПЕРЕСАДОК \u2003\u00A0'}
             <br/>
             <br/>
             <div style={this.state.allSelectingStyle}
                  onClick={() => this.props.setConnection('all', -1, !checked)}
-                 onMouseOver={() => this.setState(
-                     {allSelectingStyle: STYLES.allSelectingActive})}
-                 onMouseOut={() => this.setState(
-                     {allSelectingStyle: STYLES.allSelectingInactive})}
+                 onMouseOver={() => allSelectingMouseHandler('Active')}
+                 onMouseOut={() => allSelectingMouseHandler('Inactive')}
             >
-              &emsp;<img src={checkBoxPic}/>
-              &ensp;Все
+              {'\u2003\u00A0'}<img src={checkBoxPic}/>{'\u00A0'}Все
             </div>
             {this.props.connectionState.map(
-                (item, index) => this.renderLineInSelecting(index))}
+                (item, index) => this.renderLineInSelecting(index))
+            }
           </form>
         </div>
     )

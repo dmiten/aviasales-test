@@ -80,10 +80,10 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
       },
       list: {
         flexDirection: 'column',
-        paddingLeft: 270,
+        paddingLeft: 278,
         paddingTop: 75
       },
-      ticketOut: {
+      ticketInactive: {
         display: 'flex',
         flexDirection: 'row',
         borderStyle: 'solid',
@@ -96,7 +96,7 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
         backgroundColor: '#ffffff',
         boxShadow: PSHADOW
       },
-      ticketIn: {
+      ticketActive: {
         display: 'flex',
         flexDirection: 'row',
         borderStyle: 'solid',
@@ -123,12 +123,24 @@ const ASHADOW = '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19
       tcCity: {
         fontWeight: 500
       },
-      tcLinkButton: {
+      buttonBuyActive: {
         textAlign: 'center',
         borderStyle: 'solid',
         borderWidth: 1,
         borderRadius: '3px',
-        width: '120',
+        width: 120,
+        padding: 10,
+        fontSize: '200%',
+        color: '#ffffff',
+        borderColor: '#ff8e07',
+        backgroundColor: '#ff8e07'
+      },
+      buttonBuyInactive: {
+        textAlign: 'center',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: '3px',
+        width: 120,
         padding: 10,
         fontSize: '200%',
         color: '#ffffff',

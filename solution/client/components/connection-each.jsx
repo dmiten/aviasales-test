@@ -24,21 +24,16 @@ export default class LineInSelecting extends React.Component {
         setConnectionOnly = () => null,
         lineInSelectingStyle = STYLES.lineInSelectingInactive,
         onlySelectingStyle = STYLES.onlySelectingInactive,
-        checkBoxPic = {};
+        checkBoxPic = './res/check-box.png';
 
-    if (checked) {
-      checkBoxPic = require(
-          'url-loader?mimetype=image/png!../res/check-box-checked.png')
-    } else {
-      checkBoxPic = require(
-          'url-loader?mimetype=image/png!../res/check-box.png');
-    }
+    if (checked) checkBoxPic = './res/check-box-checked.png';
 
     if (this.state.mouseOver) {
       lineInSelectingStyle = STYLES.lineInSelectingActive;
       onlySelectingStyle = STYLES.onlySelectingActive
     }
 
+    /* при мышке над эл-том 'только' обработка клика переходит к его обработчику */
     if (this.state.mouseOverOnly) {
       setConnectionOnly = this.props.setConnection;
       setConnectionLine = () => null
@@ -46,22 +41,20 @@ export default class LineInSelecting extends React.Component {
 
     return (
         <div style={lineInSelectingStyle}
-             id={'l' + index}
              onClick={() => setConnectionLine('one', index)}
              onMouseOver={() => this.setState({mouseOver: true})}
              onMouseOut={() => this.setState({mouseOver: false})}
         >
-          &emsp;<img src={checkBoxPic}/>&ensp;
+          {'\u2003\u00A0'}<img src={checkBoxPic}/>{'\u00A0'}
           <div>
             {boxName}
           </div>
           <div style={onlySelectingStyle}
-               id={'o' + index}
                onClick={() => setConnectionOnly('only', index)}
                onMouseOver={() => this.setState({mouseOverOnly: true})}
                onMouseOut={() => this.setState({mouseOverOnly: false})}
           >
-            &emsp;&emsp;только
+            {'\u2003\u00A0\u2003\u00A0'}только
           </div>
         </div>
     )

@@ -6,13 +6,15 @@ import STYLES from './styles.js';
 import {connectionName} from './common-functions.js';
 import {DateWithMonthName} from './common-functions.js';
 import {dayOfWeek} from './common-functions.js';
+import {priceFormat} from './common-functions.js'
 
 export default class Ticket extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      ticketStyle: STYLES.ticketOut
+      ticketStyle: STYLES.ticketInactive,
+      buttonBuyStyle: STYLES.buttonBuyInactive
     }
   }
 
@@ -21,23 +23,31 @@ export default class Ticket extends React.Component {
     let item = this.props.item,
         index = this.props.index,
         callbackBuy = this.props.callbackBuy,
-        carrierLogo = require(
-            'url-loader?mimetype=image/png!../res/' + item.carrier + '.png'),
-        flight = require('url-loader?mimetype=image/png!../res/flight.png')
+        /* форматирование имени файла логотипа авиакомпании по её коду */
+        carrierLogo = './res/' + item.carrier + '.png',
+        flight = './res/flight.png',
+        /* совмещенный обработчик расположения курсора
+        * ('ticket', 'Active') => setState({ticketStyle: ticketStyleActive}) */
+        MouseHandler = (name, ev) => {
+          this.setState({[name + 'Style']: STYLES[name + ev]})
+        }
 
     return (
         <div style={this.state.ticketStyle}
-             onMouseOver={() => this.setState({ticketStyle: STYLES.ticketIn})}
-             onMouseOut={() => this.setState({ticketStyle: STYLES.ticketOut})}>
+             onMouseOver={() => MouseHandler('ticket', 'Active')}
+             onMouseOut={() => MouseHandler('ticket', 'Inactive')}
+        >
           <div style={STYLES.tcCarrierLink}>
             <div style={STYLES.carrier}>
               <img src={carrierLogo}/>
             </div>
             <br/>
-            <div style={STYLES.tcLinkButton}
-                   id={'tcLinkButton' + index}
-                   onClick={() => callbackBuy(item)}>
-              Купить <br/> за {'\n' + item.price + ' \u20BD'}
+            <div style={this.state.buttonBuyStyle}
+                 onMouseOver={() => MouseHandler('buttonBuy', 'Active')}
+                 onMouseOut={() => MouseHandler('buttonBuy', 'Inactive')}
+                 onClick={() => callbackBuy(item)}
+            >
+              Купить <br/> за {'\n' + priceFormat(item.price) + ' \u20BD'}
             </div>
           </div>
           <div style={STYLES.tcDeparture}>
