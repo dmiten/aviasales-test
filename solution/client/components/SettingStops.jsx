@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import STYLES from './styles.js';
-import LineInSelecting from './connection-each.jsx';
+import STYLES from './SettingStopsStyles.js';
+import EachStop from './EachStop.jsx';
 
-export default class SelectingOfConnections extends React.Component {
+export default class SettingStops extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,7 +16,7 @@ export default class SelectingOfConnections extends React.Component {
 
   renderLineInSelecting = (index) => {
     return (
-        <LineInSelecting
+        <EachStop
             key={'cs' + index}
             index={index}
             checked={this.props.connectionState[index]}

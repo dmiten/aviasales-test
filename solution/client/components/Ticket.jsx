@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import STYLES from './styles.js';
-import {connectionName} from './common-functions.js';
-import {DateWithMonthName} from './common-functions.js';
-import {dayOfWeek} from './common-functions.js';
-import {priceFormat} from './common-functions.js'
+import STYLES from './TicketStyles.js';
+import {connectionName} from './CommonFunctions.js';
+import {DateWithMonthName} from './CommonFunctions.js';
+import {dayOfWeek} from './CommonFunctions.js';
+import {priceFormat} from './CommonFunctions.js'
 
 export default class Ticket extends React.Component {
 

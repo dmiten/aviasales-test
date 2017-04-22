@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import STYLES from './styles.js';
-import SelectingOfConnections from './connections-set.jsx';
-import FilteredListOfTickets from './filtered-list.jsx';
-import Header from './header.jsx'
+import STYLES from './AppStyles.js';
+import SettingStops from './SettingStops.jsx';
+import FilteredList from './FilteredList.jsx';
+import Header from './Header.jsx'
 
 export default class App extends React.Component {
 
@@ -30,7 +30,7 @@ export default class App extends React.Component {
     })
   }
 
-  /* обработчик выбора количества стыковок для SelectingOfConnections */
+  /* обработчик выбора количества стыковок для SettingStops */
   setConnection = (type, index, checked) => {
     switch (type) {
       /* вкл/выкл все */
@@ -64,11 +64,11 @@ export default class App extends React.Component {
         <div>
           <Header />
           <div style={STYLES.main}>
-            <SelectingOfConnections
+            <SettingStops
                 connectionState={this.state.connectionState}
                 setConnection={this.setConnection}
             />
-            <FilteredListOfTickets
+            <FilteredList
                 ticketsList={this.state.ticketsList}
                 connectionState={this.state.connectionState}
                 buyButtonHandler={this.buyButtonHandler}

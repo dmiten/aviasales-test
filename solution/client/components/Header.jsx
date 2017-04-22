@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import STYLES from './styles.js';
+import STYLES from './HeaderStyles.js';
 
 export default function () {
   return (

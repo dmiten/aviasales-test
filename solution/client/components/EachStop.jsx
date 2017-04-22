@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import STYLES from './styles.js';
-import {connectionName} from './common-functions.js';
+import STYLES from './EachStopStyles.js';
+import {connectionName} from './CommonFunctions.js';
 
-export default class LineInSelecting extends React.Component {
+export default class EachStop extends React.Component {
 
   constructor(props) {
     super(props);
