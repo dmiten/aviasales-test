@@ -2,12 +2,10 @@
 
 import React from 'react';
 
-import STYLES from './HeaderStyles.js';
+import './Header.css';
 
 export default function () {
   return (
-      <div style={STYLES.header}>
-        <img style={STYLES.headerLogo} src={'./res/logo.png'} />
-      </div>
+      <div className='header'/>
   )
 }

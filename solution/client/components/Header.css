@@ -1,0 +1,13 @@
+.header {
+   width: 960px;
+   position: fixed;
+   display: flex;
+   height: 90px;
+   width: 960px;
+   justify-content: center;
+   background: url(/res/logo.png) center no-repeat #f3f7fa;
+   box-shadow: 0 4px 4px 0 rgba(243, 247, 250, 1), 0 6px 3px 0 rgba(243, 247, 250, 0.19);
+ }
+
+.headerLogo {
+}

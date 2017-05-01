@@ -2,18 +2,20 @@
 
 import React from 'react';
 
-import STYLES from './AppStyles.js';
-import SettingStops from './SettingStops.jsx';
-import FilteredList from './FilteredList.jsx';
+import './App.css';
+
+import Stops from './Stops.jsx';
+import Tickets from './Tickets.jsx';
 import Header from './Header.jsx'
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.TICKETS = [];
     this.state = {
       ticketsList: [],
-      connectionState: Array(4).fill(true)
+      stops: Array(4).fill(true)
     }
   }
 
@@ -21,58 +23,62 @@ export default class App extends React.Component {
     fetch('./res/tickets.json')
     .then((res) => res.json())
     .then((data) => {
-      this.setState({
-        ticketsList: data.tickets.sort(
-            (item, nextItem) => item.price - nextItem.price)
-      })
-    }).catch((e) => {
+      this.TICKETS = data.tickets.sort(
+          (item, nextItem) => item.price - nextItem.price);
+      this.setState({ticketsList: this.TICKETS})
+    })
+    .catch((e) => {
       console.error(e.message);
     })
   }
 
-  /* обработчик выбора количества стыковок для SettingStops */
-  setConnection = (type, index, checked) => {
+  handleSetStops = (type, index, checked) => {
+    let newStops = [],
+        newTcketsList = [],
+        filteringPredicate = (item) => {
+          if (( item.stops < 4 ) && (newStops[item.stops])) {
+            return true
+          } else {
+            return false
+          }
+        };
     switch (type) {
-      /* вкл/выкл все */
       case 'all': {
-        this.setState({connectionState: Array(4).fill(checked)})
+        newStops = Array(4).fill(checked)
       }
-        break;
-      /* выбран единственный пункт */
+        break
       case 'only': {
-        let newConnectionState = Array(4).fill(false);
-        newConnectionState[index] = true;
-        this.setState({connectionState: newConnectionState})
+        newStops = Array(4).fill(false);
+        newStops[index] = true
       }
-        break;
-      /* вкл/выкл один из пунктов */
+        break
       case 'one': {
-        let newConnectionState = this.state.connectionState.slice();
-        newConnectionState[index] = !newConnectionState[index];
-        this.setState({connectionState: newConnectionState})
+        newStops = this.state.stops.slice();
+        newStops[index] = !newStops[index]
       }
     }
+    newTcketsList = this.TICKETS.filter((item) => filteringPredicate(item));
+    this.setState({stops: newStops, ticketsList: newTcketsList})
   }
 
-  buyButtonHandler = (item) => {
+  handleBuyButton = (item) => {
     alert('{родительский обработчик покупки} ' + item.price)
   }
 
   render() {
-
     return (
         <div>
           <Header />
-          <div style={STYLES.main}>
-            <SettingStops
-                connectionState={this.state.connectionState}
-                setConnection={this.setConnection}
-            />
-            <FilteredList
+          <div className='main'>
+            <Stops
+                stops={this.state.stops}
+                handleSetStops={this.handleSetStops}>
+            </Stops>
+            <Tickets
                 ticketsList={this.state.ticketsList}
-                connectionState={this.state.connectionState}
-                buyButtonHandler={this.buyButtonHandler}
-            />
+                stops={this.state.stops}
+                handleBuyButton={this.handleBuyButton}>
+            </Tickets>
           </div>
         </div>
     )

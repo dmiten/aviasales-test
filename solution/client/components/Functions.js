@@ -12,7 +12,8 @@ export function DateWithMonthName(date) {
   const YEAR = ['янв', 'фев', 'мар', 'апр', 'мая', 'июня', 'июля', 'авг', 'сен',
     'окт', 'ноя', 'дек'];
   let _date = translateToStandart(date)
-  return (_date.getDay() + ' ' + YEAR[_date.getMonth()] + ' ' + _date.getFullYear())
+  return (_date.getDay() + ' ' + YEAR[_date.getMonth()] + ' '
+  + _date.getFullYear())
 }
 
 /* получение символьного дня недели */
@@ -28,7 +29,7 @@ export function priceFormat(price) {
 }
 
 /* получение и форматирование строкового значения количества пересадок */
-export function connectionName(index) {
+export function stopName(index) {
   let name = ['Без пересадок', '1 пересадка \u00A0 \u00A0',
     '2 пересадки \u00A0 \u00A0', '3 пересадки \u00A0 \u00A0']
   return (name[index])

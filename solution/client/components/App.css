@@ -1,0 +1,9 @@
+.main {
+  font-family: Arial, sans-serif;
+  cursor: default;
+  user-select: none;
+  display: flex;
+  padding: 20px;
+  margin: 0 auto;
+  color: #4a4a4a
+}

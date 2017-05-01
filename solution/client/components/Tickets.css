@@ -1,0 +1,100 @@
+.list {
+  flex-direction: column;
+  padding-left: 278px;
+  padding-top: 75px
+}
+
+.ticket {
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 18px;
+  min-height: 110px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)
+}
+
+.ticket:hover {
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 18px;
+  min-height: 110px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.tcCarrierLink {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  font-size: 50%
+}
+
+.carrier {
+}
+
+.tcTime {
+  font-size: 170%;
+}
+
+.tcCity {
+  font-weight: 500
+}
+
+.buttonBuy {
+  text-align: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  width: 120px;
+  padding: 10px;
+  font-size: 200%;
+  color: #ffffff;
+  border-color: #ff8e07;
+  background-color: #ff8e07
+}
+
+.buttonBuy:hover {
+  border-color: #ff6d00;
+  background-color: #ff6d00;
+}
+
+.tcDeparture {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  margin-left: 10px;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-left-color: #eceff1;
+  text-align: left
+}
+
+.tcDate {
+  font-size: 70%
+}
+
+.tcConnections {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 80%;
+  padding-left: 20px
+}
+
+.tcArrival {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  text-align: right
+}
