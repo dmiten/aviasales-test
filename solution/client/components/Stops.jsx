@@ -9,7 +9,8 @@ import {stopName} from './Functions.js';
 export default function Stops(props) {
 
   let checked = props.stops.reduce(
-      (previous, current) => previous && current);
+      (previous, current) => previous && current),
+      handleSetStopsAll = () => props.handleSetStops('all', -1, !checked);
   return (
       <div className='selecting'>
         <form>
@@ -19,8 +20,8 @@ export default function Stops(props) {
             <input type='checkbox'
                    id='allStops'
                    checked={checked}
-                   onClick={() => props.handleSetStops('all', -1, !checked)}
-                   onChange={() => props.handleSetStops('all', -1, !checked)}>
+                   onClick={handleSetStopsAll}
+                   onChange={handleSetStopsAll}>
             </input>
             <label htmlFor='allStops'>
               <span/>
@@ -35,23 +36,22 @@ export default function Stops(props) {
   function stop(item, index) {
     let checked = props.stops[index],
         boxName = stopName(index),
-        onSetStop = props.handleSetStops;
+        handleSetStopsOne = () => props.handleSetStops('one', index),
+        handleSetStopsOnly = () => props.handleSetStops('only', index);
     return (
         <div className='lineInSelecting'
              key={index}>
           <input type='checkbox'
                  id={index}
                  checked={checked}
-                 onChange={() => props.handleSetStops('one', index)}>
+                 onChange={handleSetStopsOne}>
           </input>
           <label htmlFor={index}>
             <span/>
             {boxName}
           </label>
           <div className='onlySelecting'
-               onClick={() => props.handleSetStops('only', index)}
-               onMouseOver={() => onSetStop = () => null}
-               onMouseOut={() => onSetStop = props.handleSetStops}>
+               onClick={handleSetStopsOnly}>
             только
           </div>
         </div>

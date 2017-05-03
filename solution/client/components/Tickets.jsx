@@ -22,7 +22,7 @@ export default function Tickets(props) {
   )
 
   function ticket(item, index) {
-    let handleBuyButton = props.handleBuyButton,
+    let handleBuyButton = () => props.handleBuyButton(item),
         carrierLogo = './res/' + item.carrier + '.png',
         flight = './res/flight.png',
         key = JSON.stringify(item);
@@ -34,7 +34,7 @@ export default function Tickets(props) {
             </div>
             <br/>
             <div className='buttonBuy'
-                 onClick={() => handleBuyButton(item)}>
+                 onClick={handleBuyButton}>
               Купить <br/> за {'\n' + priceFormat(item.price) + ' \u20BD'}
             </div>
           </div>
